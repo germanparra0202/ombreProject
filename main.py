@@ -5,6 +5,9 @@ from flask_restful import Api, Resource
 app = Flask(__name__)
 api = Api(app)
 
+# This will be the dictionary that stores the parameters for ingredients
+ingredients = {}
+
 # Defining the /foods class
 class foods(Resource):
     pass
