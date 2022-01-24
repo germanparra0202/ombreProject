@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_restful import Api, Resource
+from flask_restful import Api, Resource, reqparse
 
 # Creating the Application and the API 
 app = Flask(__name__)
@@ -16,6 +16,14 @@ class foods(Resource):
     def post(self, ingredient_id):
         print(request.form['protein'])
         return {}
+
+
+# Adding the entries, don't have to be required 
+ingredient_put_args = reqparse.RequestParser()
+ingredient_put_args.add_argument("protein", type=str, help="Protein is suggested if needed")
+ingredient_put_args.add_argument("fat", type=int, help="Fat is suggested if needed")
+ingredient_put_args.add_argument("carbohydrate", type=int, help="Carbohydrate is suggested if needed")
+ingredient_put_args.add_argument("sugar", type=int, help="Sugar is suggested if needed")
 
 # Adding the /foods endpoint
 api.add_resource(foods, "/foods")
