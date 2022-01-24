@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_restful import Api, Resource
 
 # Creating the Application and the API 
@@ -10,7 +10,12 @@ ingredients = {}
 
 # Defining the /foods class
 class foods(Resource):
-    pass
+    def get(self, ingredient_id):
+        return ingredients[ingredient]
+
+    def post(self, ingredient_id):
+        print(request.form['protein'])
+        return {}
 
 # Adding the /foods endpoint
 api.add_resource(foods, "/foods")
