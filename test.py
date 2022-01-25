@@ -5,7 +5,7 @@ import requests
 
 BASE = "http://127.0.0.1:5000/"
 
-response = requests.put(BASE + "foods/1", {"protein": 5}) # /foods must be the same as the main.py 
+response = requests.put(BASE + "foods/1", {"protein": 5, "fat": 10}) # /foods must be the same as the main.py 
 
 # Printing message
 print(response.json())

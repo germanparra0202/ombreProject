@@ -1,5 +1,7 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify, render_template
 from flask_restful import Api, Resource, reqparse
+
+import json
 
 # Creating the Application and the API 
 app = Flask(__name__)
@@ -21,12 +23,35 @@ class foods(Resource):
         return ingredients[ingredient]
 
     # If you want to create a certain 
+    # This will maybe store the info on the dict and then take action from there 
     def put(self, ingredient_id):
         args = ingredient_put_args.parse_args()
         return {ingredient_id: args}
 
 # Adding the /foods endpoint
 api.add_resource(foods, "/foods/<int:ingredient_id>")
+
+# Routes 
+@app.route("/index")
+def index():
+    return render_template('index.html')
+
+# Create the route to get the json() data
+@app.route("/", methods=["GET"])
+def starting_url():
+
+    listAppend = []
+    with open('food_data.json') as json_file:
+        data = json.load(json_file)
+
+    for i in data['report']['foods']:
+    # if i['nutrient_id'] == 203:
+        for j in i['nutrients']:
+            if j['nutrient'] == 'Protein':
+                listAppend.append(j)
+
+    # return using jsonify
+    return jsonify(listAppend)
 
 # Running the actual application
 if __name__ == "__main__":
