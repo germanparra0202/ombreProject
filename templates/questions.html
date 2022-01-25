@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h1>Create your own ingredient amounts</h1>  
+
+            <form method="POST">
+
+              <div class="form-group">
+                <div class="row mb-4">
+                    <div class="col-12">
+                      <div class="form-text">
+                      <label for="vibeName">Name your bowl of ingredients.</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <div class="row ml-2 mb-4">
+                  <div class="col-sm-4 my-auto">
+                    <label class="form-check-label" for="proteinValue" data-toggle="tooltip" data-placement="top" title="Enter amount of protein in grams.">Protein</label>
+                  </div>
+                  <div class="col-sm-8 slider">
+                    <input name="slider_protein" id="proteinRange" class="slider-range custom-range border-0" type="range" min="0.0" max="100.0" value="10.0" step="0.01">
+                    <span class="slider-value" id="proteinValue">.5</span>
+                  </div>
+                </div>
+
+                <div class="row ml-2 mb-4">
+                  <div class="col-sm-4 my-auto">
+                    <label class="form-check-label" for="fatsValue" data-toggle="tooltip" data-placement="top" title="Enter amount of fats in grams.">Fats</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input name="slider_fats" id="fatsRange" class="slider-range custom-range border-0" type="range" min="0.0" max="100.0" value="10.0" step="0.01">
+                    <span class="slider-value" id="fatsValue">.5</span>
+                  </div>
+                </div>
+
+                <div class="row ml-2 mb-4">
+                  <div class="col-sm-4 my-auto">
+                    <label class="form-check-label" for="carbohydrateValue" data-toggle="tooltip" data-placement="top" title="Enter amount of Carbohydrates in grams.">Carbohydrates</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input name="slider_carbohydrates" id="carbohydrateRange" class="slider-range custom-range border-0" type="range" min="0.0" max="100.0" value="10.0" step="0.01">
+                    <span class="slider-value" id="carbohydrateValue">.5</span>
+                  </div>
+                </div>
+
+                <div class="row ml-2 mb-4">
+                  <div class="col-sm-4 my-auto">
+                    <label class="form-check-label" for="sugarValue" data-toggle="tooltip" data-placement="top" title="Enter amount of sugar in grams.">Sugar</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input name="slider_sugar" id="sugarRange" class="slider-range custom-range border-0" type="range" min="0.0" max="100.0" value = "10.0" step="0.01">
+                    <span class="slider-value" id="sugarValue">.5</span>
+                  </div>
+                </div>
+            <button type="submit" class="btn btn-outline-secondary">Create Nutrition Amounts</button>
+        </div>
+        </form>
+
+
+<script>
+    var ac_slider = document.getElementById("proteinRange");
+    var ac_output = document.getElementById("proteinValue");
+    ac_output.innerHTML = ac_slider.value;
+
+    ac_slider.oninput = function() {
+        ac_output.innerHTML = this.value;
+    }
+  
+    var da_slider = document.getElementById("fatsRange");
+    var da_output = document.getElementById("fatsValue");
+    da_output.innerHTML = da_slider.value;
+
+    da_slider.oninput = function() {
+        da_output.innerHTML = this.value;
+    }
+    
+    var en_slider = document.getElementById("carbohydrateRange");
+    var en_output = document.getElementById("carbohydrateValue");
+    en_output.innerHTML = en_slider.value;
+
+    en_slider.oninput = function() {
+        en_output.innerHTML = this.value;
+    }
+     
+    var sp_slider = document.getElementById("sugarRange");
+    var sp_output = document.getElementById("sugarValue");
+    sp_output.innerHTML = sp_slider.value;
+
+    sp_slider.oninput = function() {
+        sp_output.innerHTML = this.value;
+    }
+
+</script>
+    
+{% endblock content %}

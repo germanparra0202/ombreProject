@@ -8,17 +8,20 @@ app = Flask(__name__)
 api = Api(app)
 
 # Adding the entries, don't have to be required 
+'''
+Not actually needed 
+
 ingredient_put_args = reqparse.RequestParser()
 ingredient_put_args.add_argument("protein", type=str, help="Protein is suggested if needed")
 ingredient_put_args.add_argument("fat", type=int, help="Fat is suggested if needed")
 ingredient_put_args.add_argument("carbohydrate", type=int, help="Carbohydrate is suggested if needed")
-ingredient_put_args.add_argument("sugar", type=int, help="Sugar is suggested if needed")
+ingredient_put_args.add_argument("sugar", type=int, help="Sugar is suggested if needed")'''
 
 # This will be the dictionary that stores the parameters for ingredients
 ingredients = {}
 
 # Defining the /foods class
-class foods(Resource):
+'''class foods(Resource):
     def get(self, ingredient_id):
         return ingredients[ingredient]
 
@@ -29,16 +32,24 @@ class foods(Resource):
         return {ingredient_id: args}
 
 # Adding the /foods endpoint
-api.add_resource(foods, "/foods/<int:ingredient_id>")
+api.add_resource(foods, "/foods/<int:ingredient_id>")'''
 
 # Routes 
 @app.route("/")
 def index():
+    # should be index.html
     return render_template('index.html')
 
 # Create the route to get the json() data
-@app.route("/ingredients", methods=["GET"])
+@app.route("/ingredients", methods=["GET", "POST"])
 def ingredients():
+
+    
+
+    return render_template('questions.html')
+
+@app.route("/foods", methods=["GET", "POST"])
+def foods():
 
     listAppend = []
     with open('food_data.json') as json_file:
@@ -52,6 +63,7 @@ def ingredients():
 
     # return using jsonify
     return jsonify(listAppend)
+
 
 # Running the actual application
 if __name__ == "__main__":
