@@ -32,13 +32,13 @@ class foods(Resource):
 api.add_resource(foods, "/foods/<int:ingredient_id>")
 
 # Routes 
-@app.route("/index")
+@app.route("/")
 def index():
     return render_template('index.html')
 
 # Create the route to get the json() data
-@app.route("/", methods=["GET"])
-def starting_url():
+@app.route("/ingredients", methods=["GET"])
+def ingredients():
 
     listAppend = []
     with open('food_data.json') as json_file:
