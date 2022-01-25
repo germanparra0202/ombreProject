@@ -26,7 +26,7 @@ def starting_url():
     for i in data['report']['foods']:
     # if i['nutrient_id'] == 203:
         for j in i['nutrients']:
-            if j['nutrient'] == 'Protein':
+            if j['nutrient'] == 'Protein' and float(j['value']) > 5.00:
                 listAppend.append(j)
 
     # return using jsonify

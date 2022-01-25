@@ -41,27 +41,67 @@ def index():
     return render_template('index.html')
 
 # Create the route to get the json() data
-@app.route("/ingredients", methods=["GET", "POST"])
+@app.route("/foods")
 def ingredients():
-
-    
 
     return render_template('questions.html')
 
 @app.route("/foods", methods=["GET", "POST"])
 def foods():
 
-    listAppend = []
+    protein = request.form['slider_protein']
+    protein = float(protein)
+    fat     = request.form['slider_fats']
+    fat     = float(fat)
+    carbs   = request.form['slider_carbohydrates']
+    carbs   = float(carbs)
+    sugar   = request.form['slider_sugar']
+    sugar   = float(sugar)
+
+    proteinValue = 0
+    fatValue = 0
+    carbValue = 0
+    sugarValue = 0
+
+    listAppend = ['Here are the reccommended meals for the inputted values.']
     with open('food_data.json') as json_file:
         data = json.load(json_file)
 
     for i in data['report']['foods']:
     # if i['nutrient_id'] == 203:
+        proteinValue = 0
+        fatValue = 0
+        carbValue = 0
+        sugarValue = 0
+        counter = 0
+
         for j in i['nutrients']:
-            if j['nutrient'] == 'Protein':
-                listAppend.append(j)
+
+            if isinstance(j['gm'], float) == False:
+                continue
+            
+            else:
+
+                if (j['nutrient_id'] == '203' and float(j['gm']) > protein):
+                    proteinValue = 1
+                elif (j['nutrient_id'] == '205' and float(j['gm']) > carbs): 
+                    carbValue = 1
+                elif (j['nutrient_id'] == '204' and float(j['gm']) > fat):
+                    fatValue = 1
+                elif (j['nutrient_id'] == '269' and float(j['gm']) > sugar):
+                    sugarValue = 1
+
+
+                if (proteinValue == 1) and (carbValue == 1) and (fatValue == 1) and (sugarValue == 1):     
+                    listAppend.append(j)
+                    counter = counter + 1
 
     # return using jsonify
+    if counter == 0:
+        listAppend.pop()
+        listAppend.append("There are no meals for your inputs.")
+
+        
     return jsonify(listAppend)
 
 
