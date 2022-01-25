@@ -9,3 +9,5 @@
 
 # From here, and after having all of the scripts, you can run the command below to run the script
 #   python3 main.py 
+
+# Go to localhost:5000 to see the first page
